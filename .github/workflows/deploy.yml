@@ -40,6 +40,15 @@ jobs:
         with:
           node-version: '20'
 
+      # Las rutas del subpath no son secretas; el robot las escribe antes de compilar.
+      - name: Configurar rutas del subpath
+        run: |
+          cat > frontend/.env.produccion <<'EOF'
+          VITE_API_URL=/inf513/grupo29sa/proyecto2/api
+          VITE_BASE=/inf513/grupo29sa/proyecto2/app/
+          VITE_BASENAME=/inf513/grupo29sa/proyecto2
+          EOF
+
       - name: Compilar el frontend para TecnoWeb
         working-directory: frontend
         run: |

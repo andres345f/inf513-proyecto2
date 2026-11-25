@@ -1,0 +1,7 @@
+# La URL del grupo apunta a la raíz del proyecto, pero Laravel se sirve
+# desde public/. Esta regla reenvía todas las peticiones a esa carpeta.
+# (Solo aplica en Apache del servidor; en local se usa `php artisan serve`.)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
