@@ -62,6 +62,8 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASSWORD }}
+          # La primera subida mueve miles de archivos (vendor/); más tiempo evita el timeout.
+          timeout: 600000
           # Carpeta local que se sube (la app Laravel ya compilada):
           local-dir: ./backend/
           # Carpeta en el SERVIDOR donde debe quedar (confírmala con tu docente):
