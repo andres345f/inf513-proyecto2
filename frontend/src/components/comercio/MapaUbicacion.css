@@ -1,0 +1,44 @@
+.mapa-ubicacion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.mapa-ubicacion__mapa {
+  height: 20rem;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: var(--radio);
+  z-index: 0;
+}
+
+.mapa-ubicacion__ayuda {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+}
+
+/* Leaflet aplica estas clases a los círculos SVG. */
+.mapa-ubicacion__origen {
+  stroke: var(--color-acento);
+  stroke-width: 3;
+  fill: var(--color-acento);
+  fill-opacity: 0.35;
+}
+
+.mapa-ubicacion__destino {
+  stroke: var(--color-primario);
+  stroke-width: 3;
+  fill: var(--color-primario);
+  fill-opacity: 0.45;
+}
+.mapa-ubicacion__marcar {
+  margin-top: 0.75rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  color: var(--color-primario);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}

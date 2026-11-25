@@ -1,0 +1,51 @@
+.solicitud-productor {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.solicitud-productor__titulo {
+  margin: 0;
+}
+
+.solicitud-productor__nota,
+.solicitud-productor__linea {
+  margin: 0;
+  color: var(--color-texto-suave);
+}
+
+.solicitud-productor__formulario {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 32rem;
+}
+
+.solicitud-productor__formulario label {
+  font-weight: 600;
+}
+
+.solicitud-productor__formulario select,
+.solicitud-productor__formulario input:not([type='checkbox']),
+.solicitud-productor__formulario textarea {
+  padding: 0.55rem 0.7rem;
+  border: var(--borde-grosor) solid var(--color-borde-control);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  font: inherit;
+}
+
+.solicitud-productor__casilla {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.solicitud-productor__comunidad-nueva {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  border: var(--borde-grosor) dashed var(--color-borde);
+  border-radius: var(--radio-pequeno);
+}

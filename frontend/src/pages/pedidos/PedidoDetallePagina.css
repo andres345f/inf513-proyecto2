@@ -1,0 +1,27 @@
+.pedido-detalle { container: hoja-pedido / inline-size; min-width: 0; display: grid; grid-template-columns: minmax(0,1fr); gap: 1rem; }
+.pedido-detalle__volver { width: fit-content; font-weight: 600; text-decoration: none; }
+.pedido-detalle__encabezado { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.pedido-detalle__encabezado p { margin: 0; color: var(--color-texto-suave); }
+.pedido-detalle__codigo { font-weight: 700; color: var(--color-primario) !important; }
+.pedido-detalle__rejilla { display: grid; grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem); gap: 1rem; align-items: start; }
+.pedido-detalle__principal, .pedido-detalle__lateral { display: grid; grid-template-columns: minmax(0,1fr); min-width: 0; gap: 1rem; }
+.pedido-detalle__lineas, .pedido-detalle__pagos, .pedido-detalle__cuotas { list-style: none; margin: 0; padding: 0; }
+.pedido-detalle__lineas li, .pedido-detalle__pagos li { display: flex; justify-content: space-between; gap: 1rem; padding: .8rem 0; border-bottom: var(--borde-grosor) solid var(--color-borde); }
+.pedido-detalle__lineas li:last-child, .pedido-detalle__pagos li:last-child { border-bottom: 0; }
+.pedido-detalle__lineas div, .pedido-detalle__pagos div { display: grid; gap: .2rem; }
+.pedido-detalle__lineas span, .pedido-detalle__pagos span { color: var(--color-texto-suave); font-size: .9rem; }
+.pedido-detalle__totales, .pedido-detalle__datos { display: grid; grid-template-columns: minmax(7rem, auto) 1fr; gap: .45rem 1rem; margin: 1rem 0 0; }
+.pedido-detalle__totales dd, .pedido-detalle__datos dd { margin: 0; text-align: right; }
+.pedido-detalle__saldo { padding-top: .55rem; border-top: var(--borde-grosor) solid var(--color-borde); font-weight: 700; }
+.pedido-detalle__linea-tiempo { list-style: none; margin: 0; padding: 0 0 0 .6rem; }
+.pedido-detalle__linea-tiempo li { position: relative; display: grid; grid-template-columns: 1rem 1fr; gap: .65rem; padding-bottom: 1.2rem; }
+.pedido-detalle__linea-tiempo li:not(:last-child)::before { content: ''; position: absolute; left: .42rem; top: .8rem; bottom: 0; border-left: 2px solid var(--color-borde); }
+.pedido-detalle__punto { z-index: 1; width: .85rem; height: .85rem; margin-top: .25rem; border-radius: 50%; background: var(--color-primario); }
+.pedido-detalle__linea-tiempo time { display: block; color: var(--color-texto-suave); font-size: .85rem; }
+.pedido-detalle__linea-tiempo p { margin: .3rem 0 0; }
+.pedido-detalle__cuotas li { display: grid; gap: .2rem; padding: .55rem 0; border-bottom: var(--borde-grosor) solid var(--color-borde); font-size: .9rem; }
+.pedido-detalle__cuota--vencida { color: var(--color-error); }
+.pedido-detalle__cancelar { display: grid; gap: .6rem; }
+.pedido-detalle__cancelar textarea { resize: vertical; padding: .6rem; border: var(--borde-grosor) solid var(--color-borde-control); border-radius: var(--radio-pequeno); background: var(--color-superficie); }
+@container hoja-pedido (max-width: 54rem) { .pedido-detalle__rejilla { grid-template-columns: 1fr; } }
+@container hoja-pedido (max-width: 33rem) { .pedido-detalle__encabezado, .pedido-detalle__lineas li, .pedido-detalle__pagos li { flex-direction: column; } .pedido-detalle__datos { grid-template-columns: 1fr; } .pedido-detalle__datos dd { text-align: left; margin-bottom: .5rem; } }

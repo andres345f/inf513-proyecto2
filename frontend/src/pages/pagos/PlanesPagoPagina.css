@@ -1,0 +1,20 @@
+.planes-pago { display: grid; gap: 1rem; }
+.planes-pago > header p { color: var(--color-texto-suave); }
+.planes-pago__lista { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr)); gap: 1rem; }
+.planes-pago__tarjeta { padding: 1rem; border: var(--borde-grosor) solid var(--color-borde); border-radius: var(--radio); background: var(--color-superficie); box-shadow: var(--sombra); }
+.planes-pago__tarjeta > header { display: flex; justify-content: space-between; align-items: start; }
+.planes-pago__tarjeta > header div { display: grid; }
+.planes-pago__tarjeta > header span:first-child { color: var(--color-texto-suave); font-size: .85rem; }
+.planes-pago__tarjeta > header a { font-size: 1.15rem; font-weight: 700; }
+.planes-pago__tarjeta dl { display: grid; grid-template-columns: 1fr auto; gap: .3rem; padding: .8rem 0; }
+.planes-pago__tarjeta dd { margin: 0; font-weight: 600; }
+.planes-pago__tarjeta ol { list-style: none; margin: 0; padding: 0; }
+.planes-pago__tarjeta li { display: flex; justify-content: space-between; gap: 1rem; padding: .7rem 0; border-top: var(--borde-grosor) solid var(--color-borde); }
+.planes-pago__tarjeta li > div { display: grid; gap: .2rem; }
+.planes-pago__tarjeta li > div:last-child { justify-items: end; }
+.planes-pago__tarjeta li span:not(.insignia) { color: var(--color-texto-suave); font-size: .85rem; }
+.planes-pago__vencida { color: var(--color-error); }
+.planes-pago__pagar { display: block; margin-top: 1rem; padding: .6rem; border-radius: var(--radio-pequeno); background: var(--color-primario); color: var(--color-sobre-primario); text-align: center; text-decoration: none; font-weight: 700; }
+.planes-pago__pagar:hover { color: var(--color-sobre-primario); background: var(--color-primario-hover); }
+.planes-pago__vacio { padding: 2rem; text-align: center; border: var(--borde-grosor) dashed var(--color-borde); border-radius: var(--radio); }
+.planes-pago__nota { margin: 1rem 0 0; color: var(--color-texto-suave); }

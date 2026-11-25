@@ -1,0 +1,84 @@
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.campo__etiqueta {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.campo__obligatorio {
+  color: var(--color-error);
+}
+
+/* El mismo control se usa dentro de FiltrosBarra (labels directos con input/select). */
+.campo__control,
+.filtros-barra input:not([type=checkbox]):not([type=radio]),
+.filtros-barra select {
+  width: 100%;
+  min-height: max(44px, 2.75rem);
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  padding: 0.62rem 0.85rem;
+  border: var(--borde-grosor) solid var(--color-borde-control);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  transition: border-color var(--duracion-rapida) ease, box-shadow var(--duracion-rapida) ease, background var(--duracion-rapida) ease;
+}
+
+.campo__control:hover:not(:disabled),
+.filtros-barra input:not([type=checkbox]):not([type=radio]):hover:not(:disabled),
+.filtros-barra select:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--color-primario) 40%, var(--color-borde-control));
+}
+
+.campo__control:focus,
+.filtros-barra input:not([type=checkbox]):not([type=radio]):focus,
+.filtros-barra select:focus {
+  border-color: var(--color-primario);
+  outline: 3px solid var(--color-foco);
+  outline-offset: 2px;
+}
+
+.campo__ayuda {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+}
+
+.campo__mensaje-error {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-error);
+}
+
+.campo--error .campo__control,
+input[aria-invalid='true'],
+select[aria-invalid='true'],
+textarea[aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.campo__fila {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.campo__casilla {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.2rem;
+  accent-color: var(--color-primario);
+}
+
+.campo__etiqueta-casilla {
+  font-size: 0.95rem;
+}
+.campo { min-inline-size: 0; }
+.campo__opcional { font-weight: 400; color: var(--color-texto-suave); }
+.campo__mensaje-error svg { vertical-align: -.15em; }

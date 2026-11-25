@@ -1,0 +1,48 @@
+.encabezado { position:relative; z-index:30; display:flex; align-items:center; gap:clamp(.5rem,1.5vw,1.75rem); min-height:4rem; padding:.45rem clamp(.9rem,3vw,2.75rem); border-bottom:1px solid var(--color-borde); background:var(--color-superficie); }
+.encabezado__logo { flex:none; display:flex; align-items:center; min-height:44px; text-decoration:none; color:var(--color-texto); }
+.encabezado__publico,.encabezado__acciones { display:flex; align-items:center; gap:.55rem; }
+.encabezado__publico a { display:grid; align-items:center; min-height:44px; color:var(--color-texto); font-weight:600; text-decoration:none; }
+.encabezado__publico a[aria-current] { color:var(--color-primario); text-decoration:underline; text-underline-offset:.3em; }
+.encabezado__acciones { margin-inline-start:auto; }
+.encabezado__icono { display:inline-grid; place-items:center; flex:none; padding:0; width:44px; min-height:44px; border:1px solid var(--color-borde-control,var(--color-borde)); border-radius:var(--radio-pequeno); color:var(--color-texto); background:var(--color-superficie); cursor:pointer; }
+.layout[data-compacto="true"] .encabezado {min-height:56px; gap:3px; padding:5px clamp(6px,2vw,16px); flex-wrap:wrap; }
+.layout[data-compacto="true"] .encabezado__acciones {gap:3px; min-width:0;}
+.layout[data-compacto="true"] .encabezado .buscador {margin-inline-start:auto;}
+.layout[data-compacto="true"] .encabezado__acciones {margin-inline-start:0;}
+.layout[data-compacto="true"] .encabezado__logo {
+  --ancho-marca: 100%;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: clamp(100px, 28vw, 145px);
+}
+
+.encabezado__carrito {display:inline-flex; align-items:center; gap:.35rem; min-height:44px; color:var(--color-texto); font-weight:600; text-decoration:none;}
+.encabezado__carrito span {font-variant-numeric:tabular-nums; color:var(--color-primario);}
+
+/* El CSS se ajusta en el mismo fotograma del cambio de orientación. La
+   notificación de matchMedia puede llegar un fotograma después que el viewport. */
+@media (max-width:960px) {
+  .layout[data-compacto="false"] .encabezado {flex-wrap:wrap; gap:3px; padding:5px 8px;}
+  .layout[data-compacto="false"] .encabezado__acciones {max-width:100%; flex-wrap:wrap; gap:3px;}
+  .layout[data-compacto="false"] .encabezado .buscador {min-width:44px; flex-basis:8rem;}
+}
+@media (max-width:440px) {
+  .layout[data-compacto="true"] .encabezado,
+  .layout[data-compacto="true"] .encabezado__acciones { flex-wrap: nowrap; }
+  .layout[data-compacto="true"] .encabezado__logo { flex: 1 0 clamp(90px, 24vw, 104px); }
+  .encabezado__acciones .campana { flex: 0 0 44px; width: 44px; height: 44px; }
+  .encabezado__acciones .menu-usuario { min-width: 0; }
+  .encabezado__acciones .menu-usuario__enlace { padding-inline: 2px; min-height: 44px; line-height: 1.2; }
+  /* El nombre del rol y su flecha pueden pasar juntos a la siguiente línea. */
+  .encabezado__acciones .menu-usuario__boton {
+    display: block;
+    max-width: 100%;
+    padding-inline: 3px;
+    font-size: .75rem;
+    line-height: 1.15;
+    transition: none;
+  }
+  .encabezado__acciones .menu-usuario__identidad,
+  .encabezado__acciones .menu-usuario__rol { display: inline; }
+  .encabezado__acciones .menu-usuario__boton > svg { width: 14px; height: 14px; vertical-align: middle; }
+}

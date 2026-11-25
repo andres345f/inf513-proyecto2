@@ -1,0 +1,25 @@
+/* Ajustes del panel /operaciones sobre la plantilla P4 y la tabla de gestión. */
+.operaciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3, 1rem);
+}
+
+.operaciones__cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3, 1rem);
+  flex-wrap: wrap;
+}
+
+.operaciones__titulo-cola {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.operaciones__enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

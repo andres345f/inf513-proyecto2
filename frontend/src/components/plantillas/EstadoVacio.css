@@ -1,0 +1,5 @@
+.estado-vacio { display: grid; justify-items: start; gap: .35rem; padding: 1.3rem 1rem; border-block: 1px solid var(--color-borde); }
+.estado-vacio__icono { color: var(--color-texto-suave); }
+.estado-vacio__titulo { margin: .2rem 0 0; font-size: 1.1rem; }
+.estado-vacio__mensaje { margin: 0; max-width: 62ch; color: var(--color-texto-suave); }
+.estado-vacio__accion { margin-block-start: .4rem; }

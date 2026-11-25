@@ -1,0 +1,335 @@
+.perfil {
+  max-width: 64rem;
+}
+
+/* ===== Tarjeta única: portada + identidad + cuerpo seccionado ===== */
+.perfil__tarjeta {
+  border-radius: var(--radio);
+  border: var(--borde-grosor) solid var(--color-borde);
+  background: var(--color-superficie);
+}
+
+/* Identidad: avatar y texto en fila. */
+.perfil__identidad {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-borde) 70%, transparent);
+}
+
+.perfil__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 4.75rem;
+  height: 4.75rem;
+  border-radius: 26px 26px 26px 8px;
+  background: var(--degradado-primario);
+  color: var(--color-sobre-primario);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  box-shadow: 0 12px 28px var(--brillo-primario, color-mix(in srgb, var(--color-primario) 25%, transparent));
+}
+
+.perfil__presentacion {
+  min-width: 0;
+  padding-top: 0;
+}
+
+.perfil__sobretitulo {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primario);
+}
+
+.perfil__presentacion h1 {
+  margin: 0.1rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.perfil__presentacion p:not(.perfil__sobretitulo) {
+  margin: 0.2rem 0 0;
+  color: var(--color-texto-suave);
+  font-size: 0.92rem;
+}
+
+.perfil__rol-chip {
+  margin: 0 0 0 auto;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  border: var(--borde-grosor) solid color-mix(in srgb, var(--color-primario) 35%, var(--color-borde));
+  background: color-mix(in srgb, var(--color-primario-suave) 55%, var(--color-superficie));
+  color: var(--color-primario);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Cuerpo: dos columnas separadas por divisor; solicitud a ancho completo. */
+.perfil__cuerpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.perfil__seccion {
+  padding: 1.5rem 2rem;
+  min-width: 0;
+}
+
+.perfil__seccion--ancha {
+  grid-column: 1 / -1;
+  border-top: 1px solid color-mix(in srgb, var(--color-borde) 70%, transparent);
+}
+
+@media (min-width: 56rem) {
+  .perfil__cuerpo {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+
+  .perfil__seccion--lateral {
+    border-left: 1px solid color-mix(in srgb, var(--color-borde) 70%, transparent);
+  }
+
+  /* Con un solo rol no hay sección "Mis roles": la solicitud ocupa su lugar. */
+  .perfil__cuerpo--sin-roles .perfil__seccion--ancha {
+    grid-column: 2;
+    grid-row: 1;
+    border-top: 0;
+    border-left: 1px solid color-mix(in srgb, var(--color-borde) 70%, transparent);
+  }
+}
+
+/* Título de sección: versalitas con barra de degradado. */
+.perfil__seccion-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-texto-suave);
+}
+
+.perfil__seccion-titulo::before {
+  content: '';
+  flex: none;
+  width: 0.9rem;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--degradado-primario, var(--color-primario));
+}
+
+/* ===== Datos personales ===== */
+.perfil__datos {
+  margin: 0 0 1.25rem;
+}
+
+.perfil__dato {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-borde) 55%, transparent);
+}
+
+.perfil__dato:last-child {
+  border-bottom: 0;
+}
+
+.perfil__dato dt {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+}
+
+.perfil__dato dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+
+.perfil__nota {
+  color: var(--color-texto-suave);
+  font-size: 0.9rem;
+}
+
+.perfil__linea {
+  margin: 0.75rem 0 0;
+  font-weight: 600;
+}
+
+/* ===== Roles ===== */
+.perfil__roles {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.perfil__rol {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  transition: transform var(--duracion-rapida) ease, border-color var(--duracion-rapida) ease, box-shadow var(--duracion-rapida) ease;
+}
+
+.perfil__rol:hover {
+  border-color: color-mix(in srgb, var(--color-primario) 40%, var(--color-borde));
+  transform: translateX(3px);
+  box-shadow: var(--sombra);
+}
+
+.perfil__rol--activo,
+.perfil__rol--activo:hover {
+  border-color: color-mix(in srgb, var(--color-primario) 55%, var(--color-borde));
+  background: linear-gradient(90deg, var(--color-primario-suave), color-mix(in srgb, var(--color-primario-suave) 40%, var(--color-superficie)));
+  box-shadow: inset 3px 0 0 var(--color-primario);
+  transform: none;
+}
+
+.perfil__insignia {
+  margin-left: 0.6rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: var(--degradado-primario, var(--color-primario));
+  color: var(--color-sobre-primario);
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: 0 3px 8px var(--brillo-primario);
+}
+
+/* ===== Solicitud de productor ===== */
+.perfil__solicitud {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 34rem;
+}
+
+.perfil__solicitud label {
+  font-weight: 600;
+}
+
+.perfil__solicitud select,
+.perfil__solicitud textarea,
+.perfil__comunidad-nueva input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: var(--borde-grosor) solid var(--color-borde-control);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  transition: border-color var(--duracion-rapida) ease, box-shadow var(--duracion-rapida) ease;
+}
+
+.perfil__solicitud select:focus,
+.perfil__solicitud textarea:focus,
+.perfil__comunidad-nueva input:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 4px var(--brillo-primario, color-mix(in srgb, var(--color-primario) 13%, transparent));
+}
+
+.perfil__solicitud textarea {
+  resize: vertical;
+}
+
+.perfil__formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.perfil__acciones {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.perfil__solicitud .perfil__casilla {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.perfil__casilla input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--color-primario);
+}
+
+.perfil__comunidad-nueva {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0.75rem 1rem 1rem;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+}
+
+.perfil__comunidad-nueva legend {
+  padding: 0 0.3rem;
+  font-weight: 700;
+}
+
+/* ===== Móvil ===== */
+@media (max-width: 40rem) {
+  .perfil__identidad {
+    padding: 1.25rem;
+  }
+
+  .perfil__dato {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+  }
+
+  .perfil__rol-chip {
+    margin: 0.5rem 0 0;
+  }
+
+  .perfil__avatar {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.2rem;
+  }
+
+  .perfil__seccion {
+    padding: 1.25rem;
+  }
+
+  .perfil__seccion + .perfil__seccion {
+    border-top: 1px solid color-mix(in srgb, var(--color-borde) 70%, transparent);
+  }
+}
+
+/* ===== Alto contraste: colores planos ===== */
+[data-contraste='alto'] .perfil__avatar {
+  background: var(--color-primario);
+}
+
+[data-contraste='alto'] .perfil__rol-chip {
+  background: var(--color-primario-suave);
+}
+
+[data-contraste='alto'] .perfil__rol--activo {
+  background: var(--color-primario-suave);
+}

@@ -1,0 +1,12 @@
+.mi-cuenta {max-width:76rem; color:var(--color-texto);}
+.mi-cuenta__seccion {max-width:57rem; margin-block:1.6rem; border-top:1px solid var(--color-borde); padding-top:1rem;}
+.mi-cuenta h2 {font-size:1.375rem; margin:0 0 .75rem;}
+.mi-cuenta__cabecera,.mi-cuenta__filas li {display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.3rem 1rem;}
+.mi-cuenta__cabecera h2 {margin:0;}
+.mi-cuenta__filas {list-style:none; margin:0; padding:0;}
+.mi-cuenta__filas li {padding:.7rem 0; border-bottom:1px solid var(--color-borde);}
+.mi-cuenta__filas li > div {min-width:0; display:grid; gap:.15rem;}
+.mi-cuenta__filas li > div > span,.mi-cuenta__solicitud span {color:var(--color-texto-suave);}
+.mi-cuenta a {display:inline-flex; align-items:center; min-height:44px; font-weight:600;}
+.mi-cuenta__solicitud {margin-top:1.25rem; border-top:1px solid var(--color-borde); padding-top:.5rem;}
+.mi-cuenta__filas strong {overflow-wrap:anywhere;}

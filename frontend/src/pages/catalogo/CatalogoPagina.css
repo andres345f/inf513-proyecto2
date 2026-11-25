@@ -1,0 +1,9 @@
+.catalogo { min-inline-size: 0; container: catalogo / inline-size; }
+.catalogo__rejilla { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(13.5rem, 100%), 1fr)); gap: 1rem; }
+@container catalogo (max-width: 30rem) {
+  .catalogo__rejilla { grid-template-columns: minmax(0,1fr); gap: .75rem; }
+  .producto-tarjeta__enlace { display: grid; grid-template-columns: minmax(4rem, 30%) minmax(0, 1fr); align-items: start; }
+  .producto-tarjeta__cuerpo { padding-block: .65rem .35rem; }
+  .producto-tarjeta .imagen-producto { border-start-end-radius: 0; }
+  .producto-tarjeta__pie { padding-block: .2rem .5rem; }
+}

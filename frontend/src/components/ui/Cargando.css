@@ -1,0 +1,23 @@
+.cargando {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1rem;
+  color: var(--color-texto-suave);
+}
+
+.cargando__circulo {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid var(--color-primario-suave);
+  border-top-color: var(--color-primario);
+  border-radius: 50%;
+  animation: cargando-giro 0.8s linear infinite;
+}
+
+@keyframes cargando-giro {
+  to {
+    transform: rotate(360deg);
+  }
+}

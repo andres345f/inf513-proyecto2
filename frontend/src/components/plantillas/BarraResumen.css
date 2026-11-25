@@ -1,0 +1,69 @@
+.barra-resumen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+}
+
+.barra-resumen__total {
+  color: var(--color-texto-suave);
+  font-weight: 600;
+}
+
+.barra-resumen__chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  gap: 0.45rem;
+}
+
+.barra-resumen__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 999px;
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  font-size: 0.85rem;
+  transition: border-color var(--duracion-rapida) ease, background var(--duracion-rapida) ease,
+    box-shadow var(--duracion-rapida) ease;
+}
+
+span.barra-resumen__chip {
+  cursor: default;
+}
+
+.barra-resumen__punto {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--chip-tono, var(--color-info));
+}
+
+.barra-resumen__chip--info { --chip-tono: var(--color-info); }
+.barra-resumen__chip--aviso { --chip-tono: var(--color-aviso); }
+.barra-resumen__chip--error { --chip-tono: var(--color-error); }
+.barra-resumen__chip--exito { --chip-tono: var(--color-exito); }
+.barra-resumen__chip--primario { --chip-tono: var(--color-primario); }
+
+.barra-resumen__cantidad {
+  font-variant-numeric: tabular-nums;
+}
+
+.barra-resumen__chip--activo {
+  border-color: var(--color-primario);
+  background: var(--color-primario-suave);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--color-primario);
+}
+
+button.barra-resumen__chip:hover {
+  border-color: var(--color-primario);
+}

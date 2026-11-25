@@ -1,0 +1,92 @@
+.panel-pago {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.25rem;
+  border: 2px solid var(--color-primario);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+}
+
+.panel-pago h2 {
+  margin: 0;
+}
+
+.panel-pago__monto {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.panel-pago__metodos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.panel-pago__metodo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.6rem;
+  padding: 0.45rem 1rem;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.panel-pago__metodo--activo {
+  border-color: var(--color-primario);
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+}
+
+.panel-pago__tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.panel-pago__guardadas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.panel-pago__guardadas label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.panel-pago__guardadas select {
+  min-height: 2.6rem;
+  padding: 0.4rem 0.6rem;
+  border: var(--borde-grosor) solid var(--color-borde-control);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+}
+
+.panel-pago__nota,
+.panel-pago__espera {
+  margin: 0;
+  color: var(--color-texto-suave);
+}
+
+.panel-pago__qr {
+  align-self: center;
+  padding: 0.75rem;
+  border-radius: var(--radio-pequeno);
+  background: var(--color-lienzo-claro);
+}
+
+.panel-pago__cambiar {
+  align-self: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-primario);
+  text-decoration: underline;
+  cursor: pointer;
+}

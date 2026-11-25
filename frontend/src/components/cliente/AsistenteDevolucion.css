@@ -1,0 +1,49 @@
+.asistente-devolucion__selector {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.asistente-devolucion__selector label {
+  font-weight: 600;
+}
+
+.asistente-devolucion__selector select {
+  padding: 0.55rem 0.7rem;
+  border: var(--borde-grosor) solid var(--color-borde-control);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  font: inherit;
+}
+
+.asistente-devolucion__error {
+  margin: 0;
+  color: var(--color-error);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.asistente-devolucion__resumen {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem 1rem;
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie-alterna);
+}
+
+.asistente-devolucion__resumen dt {
+  color: var(--color-texto-suave);
+}
+
+.asistente-devolucion__resumen dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.asistente-devolucion__pie {
+  display: flex;
+  justify-content: flex-end;
+}

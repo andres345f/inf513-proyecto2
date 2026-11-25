@@ -1,0 +1,123 @@
+.factura-pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%; min-width: 0;
+}
+
+.factura-pagina__acciones {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.factura-pagina__acciones a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+
+.factura {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+}
+
+.factura__cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--color-primario);
+}
+
+.factura__emisor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--color-primario);
+}
+
+.factura__emisor div {
+  display: flex;
+  flex-direction: column;
+}
+
+.factura__emisor strong {
+  font-size: 1.4rem;
+}
+
+.factura__emisor span {
+  font-size: 0.85rem;
+  color: var(--color-texto-suave);
+}
+
+.factura__numero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  overflow-wrap: anywhere;
+}
+
+.factura__numero h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.factura__anulada {
+  color: var(--color-error);
+}
+
+.factura__cliente {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem 1rem;
+  margin: 0;
+}
+
+.factura__cliente dt {
+  font-weight: 700;
+}
+
+.factura__cliente dd {
+  margin: 0;
+  min-width: 0; overflow-wrap: anywhere;
+}
+
+.factura__pie {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--color-texto-suave);
+}
+
+@media (max-width: 40rem) {
+  .factura {
+    padding: 1.1rem;
+  }
+
+  .factura__numero {
+    align-items: flex-start;
+  }
+}
+
+@media print {
+  .factura {
+    border: 0;
+    padding: 0;
+    background: var(--color-impresion-fondo);
+  }
+
+  [data-modo='noche'] .factura {
+    --color-texto-suave: var(--color-impresion-texto);
+  }
+}

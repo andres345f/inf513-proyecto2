@@ -1,0 +1,142 @@
+.permisos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 72rem;
+}
+
+.permisos__ayuda {
+  margin: 0;
+  color: var(--color-texto-suave);
+}
+
+.permisos__roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.permisos__rol {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.9rem;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: 999px;
+  background: var(--color-superficie);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.permisos__rol span {
+  min-width: 1.6rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: var(--color-superficie-alterna);
+  font-size: 0.8rem;
+}
+
+.permisos__rol[aria-pressed='true'] {
+  border-color: var(--color-primario);
+  background: var(--color-primario);
+  color: var(--color-sobre-primario);
+}
+
+.permisos__rol[aria-pressed='true'] span {
+  background: var(--color-superficie);
+  color: var(--color-primario);
+}
+
+.permisos__grupos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Cada grupo es una tarjeta de ancho completo con sus opciones en fila. */
+.permisos__grupo {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+  gap: 0.25rem 1rem;
+  margin: 0;
+  padding: 0.75rem 1rem 1rem;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+}
+
+.permisos__grupo legend {
+  padding: 0 0.4rem;
+  font-weight: 700;
+}
+
+.permisos__opcion {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.4rem;
+  border-radius: var(--radio-pequeno);
+  cursor: pointer;
+}
+
+.permisos__opcion:hover {
+  background: var(--color-primario-suave);
+}
+
+.permisos__opcion input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--color-primario);
+}
+
+.permisos__texto {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.permisos__texto strong {
+  font-weight: 600;
+}
+
+.permisos__texto small {
+  color: var(--color-texto-suave);
+  font-size: 0.75rem;
+}
+
+.permisos__opcion svg {
+  color: var(--color-texto-suave);
+}
+
+.permisos__acciones {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+}
+
+.permisos__mensaje {
+  flex-basis: 100%;
+}
+
+.permisos__acciones > span {
+  margin-right: auto;
+  color: var(--color-texto-suave);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 960px) {
+  .permisos__acciones {
+    bottom: calc(4.2rem + env(safe-area-inset-bottom, 0px));
+    z-index: 5;
+  }
+}

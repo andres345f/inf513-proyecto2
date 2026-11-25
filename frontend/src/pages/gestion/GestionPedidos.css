@@ -1,0 +1,66 @@
+@import '../../components/plantillas/gestion.css';
+
+.gestion {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.gestion__tabla-contenedor {
+  overflow-x: auto;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+}
+
+.gestion__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.gestion__tabla th,
+.gestion__tabla td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--color-borde);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.gestion__tabla th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--color-superficie-alterna);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-texto-suave);
+}
+
+.gestion__tabla tbody tr {
+  transition: background var(--duracion-rapida) ease, box-shadow var(--duracion-rapida) ease;
+}
+
+.gestion__tabla tbody tr:hover {
+  background: color-mix(in srgb, var(--color-primario-suave) 55%, var(--color-superficie));
+}
+
+.gestion__cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.gestion__cabecera h1 {
+  margin: 0;
+}
+
+.gestion__cabecera p {
+  margin: 0.25rem 0 0;
+  color: var(--color-texto-suave);
+}

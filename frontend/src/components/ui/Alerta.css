@@ -1,0 +1,26 @@
+.alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: .65rem;
+  padding: 0.9rem 1rem;
+  border: var(--borde-grosor) solid currentColor;
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+}
+
+.alerta__titulo {
+  display: block;
+  font-weight: 700;
+}
+
+.alerta--error { color: var(--color-error); background: var(--color-error-suave); }
+.alerta--exito { color: var(--color-exito); background: var(--color-exito-suave); }
+.alerta--aviso { color: var(--color-aviso); background: var(--color-aviso-suave); }
+.alerta--info { color: var(--color-info); background: var(--color-info-suave); }
+
+.alerta > svg { flex: none; margin-top: .1em; }
+.alerta > div {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  color: var(--color-texto);
+}

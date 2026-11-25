@@ -1,0 +1,45 @@
+.nuevo-usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 2px solid var(--color-primario);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+}
+
+.nuevo-usuario h2 {
+  margin: 0;
+}
+
+.nuevo-usuario__rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: 0.9rem 1rem;
+}
+
+.nuevo-usuario__rol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.nuevo-usuario__rol label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.nuevo-usuario__rol select {
+  min-height: 2.75rem;
+  padding: 0.5rem 0.7rem;
+  border: var(--borde-grosor) solid var(--color-borde-control);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+}
+
+.nuevo-usuario__acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

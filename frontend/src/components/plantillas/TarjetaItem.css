@@ -1,0 +1,137 @@
+.tarjeta-item {
+  position: relative;
+  display: grid;
+  gap: .55rem;
+  padding: 1rem 1.2rem;
+  border: var(--borde-grosor) solid color-mix(in srgb, var(--color-borde) 82%, transparent);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+  color: var(--color-texto);
+  text-decoration: none;
+  transition: transform var(--duracion-media) ease, box-shadow var(--duracion-media) ease,
+    border-color var(--duracion-media) ease;
+}
+
+.tarjeta-item--enlace:hover {
+  border-color: color-mix(in srgb, var(--color-primario) 50%, var(--color-borde));
+  color: var(--color-texto);
+}
+
+.tarjeta-item--destacada { border-color: var(--color-primario); }
+
+.tarjeta-item__cabecera {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.tarjeta-item__icono {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: var(--radio-pequeno);
+  color: var(--color-primario);
+}
+
+.tarjeta-item__identidad {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.tarjeta-item__titulo {
+  font-family: var(--fuente-titulos);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.tarjeta-item--enlace:hover .tarjeta-item__titulo {
+  color: var(--color-primario);
+}
+
+.tarjeta-item__subtitulo {
+  color: var(--color-texto-suave);
+  font-size: 0.88rem;
+}
+
+.tarjeta-item__lateral {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: none;
+}
+
+.tarjeta-item__monto {
+  font-family: var(--fuente-titulos);
+  font-size: 1.12rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tarjeta-item__datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  gap: 0.6rem 1.25rem;
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-borde) 70%, transparent);
+}
+
+.tarjeta-item__datos > div {
+  display: grid;
+  gap: 0.22rem;
+  align-content: start;
+}
+
+.tarjeta-item__datos dt {
+  color: var(--color-texto-suave);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tarjeta-item__datos dd {
+  margin: 0;
+  justify-self: start;
+}
+
+.tarjeta-item__extra {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--color-texto-suave);
+  font-size: 0.92rem;
+}
+
+.tarjeta-item__extra p {
+  margin: 0;
+}
+
+.tarjeta-item__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-borde) 70%, transparent);
+}
+
+@media (max-width: 560px) {
+  .tarjeta-item__cabecera {
+    flex-wrap: wrap;
+  }
+
+  .tarjeta-item__lateral {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+.tarjeta-item__cabecera { flex-wrap: wrap; }
+.tarjeta-item__cabecera .insignia { white-space: normal; }
+.tarjeta-item__datos, .tarjeta-item__extra { min-width: 0; }
+.tarjeta-item__monto { font-variant-numeric: tabular-nums; }

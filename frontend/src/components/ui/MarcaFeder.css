@@ -1,0 +1,22 @@
+.marca-feder {
+  display: block;
+  inline-size: var(--ancho-marca, clamp(136px, 11vw, 168px));
+  max-inline-size: 100%;
+}
+
+.marca-feder img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.marca-feder-papel { display: none; }
+
+@media print {
+  .marca-feder-papel {
+    display: block;
+    inline-size: var(--ancho-marca, clamp(136px, 11vw, 168px));
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+}

@@ -1,0 +1,68 @@
+# =====================================================================
+# CI/CD · Compila el proyecto y lo sube a TecnoWeb por FTP.
+# Se ejecuta en cada "git push" a la rama indicada (y a mano si quieres).
+#
+# ANTES de usarlo, en GitHub:  Settings → Secrets and variables → Actions
+# crea estos 3 secretos (NO van en el código):
+#   FTP_HOST      -> el servidor FTP de TecnoWeb (ej. tecnoweb.org.bo)
+#   FTP_USER      -> tu usuario FTP (grupo29sa)
+#   FTP_PASSWORD  -> tu contraseña FTP
+# Y revisa las dos líneas marcadas con  # <-- CAMBIA
+# =====================================================================
+name: Desplegar a TecnoWeb (FTP)
+
+on:
+  push:
+    branches: [ main ]        # <-- CAMBIA a "master" si tu rama se llama así
+  workflow_dispatch:           # permite lanzarlo a mano desde la pestaña Actions
+
+jobs:
+  construir-y-desplegar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      # ---------- Backend (Laravel): dependencias PHP ----------
+      - name: Preparar PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_pgsql, gd, intl, mbstring, xml, zip
+
+      - name: Instalar dependencias de Composer (sin dev)
+        working-directory: backend
+        run: composer install --no-dev --optimize-autoloader --no-interaction
+
+      # ---------- Frontend (React/Vite): compilar ----------
+      - name: Preparar Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Compilar el frontend para TecnoWeb
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build:produccion
+
+      # ---------- Subir al servidor por FTP ----------
+      - name: Subir por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Carpeta local que se sube (la app Laravel ya compilada):
+          local-dir: ./backend/
+          # Carpeta en el SERVIDOR donde debe quedar (confírmala con tu docente):
+          server-dir: ./proyecto2/          # <-- CAMBIA por la ruta real en TecnoWeb
+          # No subir estos (secretos, git, pruebas, logs):
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.env
+            **/.env.*
+            **/tests/**
+            **/storage/logs/**
+            **/.github/**

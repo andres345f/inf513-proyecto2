@@ -1,0 +1,13 @@
+/* La rejilla de dos columnas: tarjetas guardadas + formulario de alta. */
+.metodos-pago__rejilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .metodos-pago__rejilla {
+    grid-template-columns: 1fr;
+  }
+}

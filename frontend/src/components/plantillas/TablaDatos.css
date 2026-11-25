@@ -1,0 +1,76 @@
+.tabla-datos {
+  container: registros / inline-size;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  overflow-x: auto;
+  border: var(--borde-grosor) solid var(--color-borde);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+}
+.tabla-datos table { inline-size: 100%; border-collapse: collapse; font-size: .9375rem; }
+.tabla-datos :is(th, td) {
+  padding: .65rem .75rem;
+  border-block-end: 1px solid var(--color-borde);
+  text-align: start;
+  vertical-align: middle;
+  overflow-wrap: normal;
+}
+.tabla-datos thead th {
+  background: var(--color-superficie-alterna);
+  color: var(--color-texto-suave);
+  font-size: .875rem;
+  font-weight: 650;
+}
+.tabla-datos tbody tr:last-child td { border-block-end: 0; }
+.tabla-datos__etiqueta { display: none; }
+.tabla-datos__valor { min-inline-size: 0; }
+.tabla-datos__valor small { color: var(--color-texto-suave); }
+.tabla-datos .insignia { white-space: normal; }
+.tabla-datos td:is([data-columna="nombre"], [data-columna="descripcion"], [data-columna="detalle"], [data-columna="correo"]) .tabla-datos__valor { overflow-wrap: anywhere; }
+.tabla-datos td[data-columna="acciones"] :is(button, a) { overflow-wrap: normal; word-break: normal; }
+@container registros (min-width: 45.001rem) {
+  .tabla-datos td[data-columna="codigo"] .tabla-datos__valor,
+  .tabla-datos td[data-columna="stock"] .insignia { white-space: nowrap; }
+}
+.tabla-datos td:is([data-columna="total"], [data-columna="pagado"], [data-columna="precio"], [data-columna="precio_venta"], [data-columna="peso_kg"], [data-columna="monto"], [data-columna="saldo"]) .tabla-datos__valor {
+  text-align: end;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.tabla-datos--comparativa table { min-inline-size: 42rem; }
+.tabla-datos--comparativa .celda-detalle { min-inline-size: 12rem; }
+@container registros (max-width: 45rem) {
+  .tabla-datos--registros table, .tabla-datos--registros tbody, .tabla-datos--registros tr { display: block; }
+  .tabla-datos--registros thead {
+    position: absolute;
+    inline-size: 1px; block-size: 1px;
+    overflow: hidden; clip-path: inset(50%);
+  }
+  .tabla-datos--registros tbody tr { padding: .65rem .8rem; }
+  .tabla-datos--registros tbody tr + tr { border-block-start: 1px solid var(--color-borde-control); }
+  .tabla-datos--registros td {
+    display: grid;
+    overflow-wrap: anywhere;
+    grid-template-columns: minmax(5rem, 32%) minmax(0, 1fr);
+    align-items: baseline;
+    gap: .6rem;
+    padding: .25rem 0;
+    border: 0;
+  }
+  .tabla-datos__etiqueta { display: block; color: var(--color-texto-suave); font-size: .875rem; }
+  .tabla-datos--registros .tabla-datos__valor:has(input, button, select) { grid-column: 1 / -1; }
+  .tabla-datos--registros .tabla-datos__valor :is(input, select) { max-inline-size: 100%; }
+}
+@container registros (max-width: 19rem) {
+  .tabla-datos--registros td { grid-template-columns: 1fr; gap: 0; }
+}
+.tabla-datos td.tabla-datos__mas, .tabla-datos__cabecera-detalle { display: none; }
+@container registros (max-width: 45rem) {
+  .tabla-datos__cabecera-detalle { display: table-cell; }
+  .tabla-datos--registros tr[data-abierta="false"] [data-secundaria="true"] { display: none; }
+  .tabla-datos--registros td.tabla-datos__mas { display: block; }
+  .tabla-datos__mas button {
+    min-height: 44px; padding: .3rem 0; border: 0; background: transparent;
+    color: var(--color-primario); text-decoration: underline; font: inherit; cursor: pointer;
+  }
+}

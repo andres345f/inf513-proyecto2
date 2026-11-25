@@ -1,0 +1,298 @@
+/* Los atributos del documento controlan tema, modo, contraste y escala. */
+:root {
+  --espacio-1: .25rem;
+  --espacio-2: .5rem;
+  --espacio-3: .75rem;
+  --espacio-4: 1rem;
+  --espacio-5: 1.5rem;
+  --espacio-6: 2rem;
+  --espacio-7: 3rem;
+  --sombra-minima: none;
+  --sombra: none;
+  --sombra-elevada: 0 4px 18px rgb(0 0 0 / .16);
+  --color-marca: var(--color-primario);
+  --color-marca-profundo: #1f4a2c;
+  --degradado-primario: var(--color-primario);
+  --degradado-superficie: var(--color-superficie);
+  --degradado-hero: var(--color-superficie-alterna);
+}
+
+:root,
+[data-tema='adultos'] {
+  --fuente-cuerpo: 'Source Sans 3', system-ui, sans-serif;
+  --fuente-titulos: 'Bitter', Georgia, serif;
+  --radio: 10px;
+  --radio-pequeno: 7px;
+  --radio-grande: 14px;
+  --borde-grosor: 1px;
+  --ancho-pagina: 76rem;
+
+  --color-fondo: #f1f6f6;
+  --color-superficie: #ffffff;
+  --color-superficie-alterna: #e5eeee;
+  --color-borde: #d0dddd;
+  /* Contorno de campos de formulario: ≥ 3:1 sobre la superficie (WCAG 1.4.11). --color-borde queda para tarjetas y separadores. */
+  --color-borde-control: #6b8485;
+  --color-texto: #19292b;
+  --color-texto-suave: #476063;
+  --color-primario: #3b7977;
+  --color-primario-hover: #2c5f5d;
+  --color-sobre-primario: #ffffff;
+  --color-primario-suave: #dcecec;
+  --color-acento: #b8460f;
+  --color-acento-vivo: #f3722c;
+  --color-info: #277da1;
+  --color-info-suave: #dcedf4;
+  --color-exito: #4a7c2a;
+  --color-error: #d12f32;
+  --color-aviso: #8f5400;
+  --color-foco: #277da1;
+  --color-velo: rgb(10 16 18 / 0.62);
+  --color-superficie-elevada: #ffffff;
+  --color-acento-suave: #fde4d3;
+  --color-sobre-acento: #241a10;
+  --color-error-suave: #fde3e3;
+  --color-exito-suave: #e8f2de;
+  --color-aviso-suave: #fdf0cf;
+  --color-lienzo-claro: #ffffff;
+  --color-sobre-error: #ffffff;
+  --color-impresion-fondo: #ffffff;
+  --color-impresion-texto: #000000;
+  --duracion-rapida: 160ms;
+  --duracion-media: 240ms;
+}
+
+[data-tema='adultos'][data-modo='noche'] {
+  --color-fondo: #0e1717;
+  --color-superficie: #152221;
+  --color-superficie-alterna: #1c2f2e;
+  --color-borde: #2b4342;
+  --color-borde-control: #7a9695;
+  --color-texto: #e6f0ef;
+  --color-texto-suave: #a6bcbb;
+  --color-primario: #7cc5c2;
+  --color-primario-hover: #a0d8d5;
+  --color-sobre-primario: #0a2928;
+  --color-primario-suave: #1b3c3b;
+  --color-acento: #f9844a;
+  --color-acento-vivo: #f8961e;
+  --color-info: #7ab8d6;
+  --color-info-suave: #1b3242;
+  --color-exito: #90be6d;
+  --color-error: #ff7b7e;
+  /* Texto oscuro sobre el rojo claro de noche (botón peligro, contador de la campana): ≥ 4,5:1. */
+  --color-sobre-error: #2a0506;
+  --color-aviso: #f9c74f;
+  --color-foco: #f8961e;
+  --color-velo: rgb(0 0 0 / 0.75);
+  --color-superficie-elevada: #1c2f2e;
+  --color-acento-suave: #44301a;
+  --color-sobre-acento: #241003;
+  --color-error-suave: #461f22;
+  --color-exito-suave: #202f18;
+  --color-aviso-suave: #3f341a;
+}
+
+/* ---------- Jóvenes: cobalto y lavanda ---------- */
+[data-tema='jovenes'] {
+  --fuente-cuerpo: 'Outfit', system-ui, sans-serif;
+  --fuente-titulos: 'Outfit', system-ui, sans-serif;
+  --radio: 20px;
+  --radio-pequeno: 13px;
+  --radio-grande: 30px;
+  --borde-grosor: 1px;
+
+  --color-fondo: #f1f1fc;
+  --color-superficie: #ffffff;
+  --color-superficie-alterna: #eae7f9;
+  --color-borde: #d9d4ee;
+  --color-borde-control: #8580ad;
+  --color-texto: #15153a;
+  --color-texto-suave: #565a80;
+  --color-primario: #3742c8;
+  --color-primario-hover: #26309e;
+  --color-sobre-primario: #ffffff;
+  --color-primario-suave: #e7e8fc;
+  --color-acento: #d84b16;
+  --color-acento-vivo: #f06a2e;
+  --color-info: #38587c;
+  --color-info-suave: #e4edf6;
+  --color-exito: #2f713d;
+  --color-error: #b51c45;
+  --color-aviso: #8f5a10;
+  --color-foco: #d84b16;
+  --color-velo: rgb(14 12 42 / 0.62);
+  --color-superficie-elevada: #ffffff;
+  --color-acento-suave: #ffe0d0;
+  --color-sobre-acento: #140600;
+  --color-error-suave: #fce2e9;
+  --color-exito-suave: #e6f3e8;
+  --color-aviso-suave: #fbecd0;
+}
+
+[data-tema='jovenes'][data-modo='noche'] {
+  --color-fondo: #0e0f22;
+  --color-superficie: #1a1b32;
+  --color-superficie-alterna: #24254a;
+  --color-borde: #373963;
+  --color-borde-control: #7173a8;
+  --color-texto: #edeaf9;
+  --color-texto-suave: #b2b0d2;
+  --color-primario: #b3b8ff;
+  --color-primario-hover: #ccd0ff;
+  --color-sobre-primario: #14153a;
+  --color-primario-suave: #2b2c55;
+  --color-acento: #ff9b6b;
+  --color-acento-vivo: #ffb287;
+  --color-info: #9bb8d6;
+  --color-info-suave: #20303f;
+  --color-exito: #7ccb8c;
+  --color-error: #ff9eb6;
+  --color-sobre-error: #2a0612;
+  --color-aviso: #ecc47a;
+  --color-foco: #ff9b6b;
+  --color-velo: rgb(0 0 0 / 0.74);
+  --color-superficie-elevada: #212240;
+  --color-acento-suave: #4a2c1c;
+  --color-sobre-acento: #2b1204;
+  --color-error-suave: #46202c;
+  --color-exito-suave: #1c2e20;
+  --color-aviso-suave: #3f321a;
+}
+
+/* ---------- Niños: celeste suave, durazno y crema (descansado) ---------- */
+[data-tema='ninos'] {
+  --fuente-cuerpo: 'Nunito', system-ui, sans-serif;
+  --fuente-titulos: 'Nunito', system-ui, sans-serif;
+  --radio: 26px;
+  --radio-pequeno: 16px;
+  --radio-grande: 34px;
+  --borde-grosor: 2px;
+
+  --color-fondo: #eef6f9;
+  --color-superficie: #ffffff;
+  --color-superficie-alterna: #e2f0f5;
+  --color-borde: #c5dfe8;
+  --color-borde-control: #6a93a3;
+  --color-texto: #1e3a47;
+  --color-texto-suave: #476471;
+  --color-primario: #1b6f86;
+  --color-primario-hover: #14566a;
+  --color-sobre-primario: #ffffff;
+  --color-primario-suave: #d9eef4;
+  --color-acento: #d97b45;
+  --color-acento-vivo: #f0a564;
+  --color-info: #2b6a94;
+  --color-info-suave: #e0eef5;
+  --color-exito: #2f713d;
+  --color-error: #b3261e;
+  --color-aviso: #8a5310;
+  --color-foco: #2a8fa8;
+  --color-velo: rgb(30 58 71 / 0.45);
+  --color-superficie-elevada: #ffffff;
+  --color-acento-suave: #fdeadb;
+  --color-sobre-acento: #241003;
+  --color-error-suave: #fde3e0;
+  --color-exito-suave: #e6f3e8;
+  --color-aviso-suave: #fbeac6;
+}
+
+[data-tema='ninos'][data-modo='noche'] {
+  --color-fondo: #101b20;
+  --color-superficie: #18262c;
+  --color-superficie-alterna: #22323a;
+  --color-borde: #33474f;
+  --color-borde-control: #62838f;
+  --color-texto: #e6f1f4;
+  --color-texto-suave: #a9bfc8;
+  --color-primario: #7cc7d8;
+  --color-primario-hover: #a3dbe7;
+  --color-sobre-primario: #0d2c33;
+  --color-primario-suave: #1d3d47;
+  --color-acento: #eda06b;
+  --color-acento-vivo: #f5b98a;
+  --color-info: #93c6e8;
+  --color-info-suave: #1e3444;
+  --color-exito: #7ccb8c;
+  --color-error: #ef9a92;
+  --color-sobre-error: #2a0705;
+  --color-aviso: #ecc87c;
+  --color-foco: #7cc7d8;
+  --color-velo: rgb(0 0 0 / 0.7);
+  --color-superficie-elevada: #1c2f37;
+  --color-acento-suave: #3d2c1c;
+  --color-sobre-acento: #241003;
+  --color-error-suave: #462320;
+  --color-exito-suave: #1c2e20;
+  --color-aviso-suave: #40331a;
+}
+
+/* ---------- Alto contraste (se superpone a cualquier tema) ---------- */
+html[data-contraste='alto'] {
+  --color-fondo: #ffffff;
+  --color-superficie: #ffffff;
+  --color-superficie-alterna: #ffffff;
+  --color-borde: #000000;
+  --color-borde-control: #000000;
+  --color-texto: #000000;
+  --color-texto-suave: #000000;
+  --color-primario: #0000b3;
+  --color-primario-hover: #000080;
+  --color-sobre-primario: #ffffff;
+  --color-primario-suave: #ffff00;
+  --color-acento: #000000;
+  --color-acento-vivo: #000000;
+  --color-info: #0000b3;
+  --color-info-suave: #ffff00;
+  --color-exito: #4b0082;
+  --color-error: #a00000;
+  --color-sobre-error: #ffffff;
+  --color-aviso: #000000;
+  --color-foco: #ff00ff;
+  --borde-grosor: 2px;
+  --color-velo: #000000;
+  --color-superficie-elevada: #ffffff;
+  --color-acento-suave: #ffff00;
+  --color-sobre-acento: #ffffff;
+  --color-error-suave: #ffffff;
+  --color-exito-suave: #ffffff;
+  --color-aviso-suave: #ffff00;
+}
+
+html[data-contraste='alto'][data-modo='noche'] {
+  --color-fondo: #000000;
+  --color-superficie: #000000;
+  --color-superficie-alterna: #000000;
+  --color-borde: #ffffff;
+  --color-borde-control: #ffffff;
+  --color-texto: #ffffff;
+  --color-texto-suave: #ffffff;
+  --color-primario: #ffff00;
+  --color-primario-hover: #ffffff;
+  --color-sobre-primario: #000000;
+  --color-primario-suave: #333300;
+  --color-acento: #00ffff;
+  --color-acento-vivo: #00ffff;
+  --color-info: #00ffff;
+  --color-info-suave: #333300;
+  --color-exito: #d9b3ff;
+  --color-error: #ff6b6b;
+  --color-sobre-error: #000000;
+  --color-aviso: #ffff00;
+  --color-foco: #00ffff;
+  --color-velo: #ffffff;
+  --color-superficie-elevada: #000000;
+  --color-acento-suave: #333300;
+  --color-sobre-acento: #000000;
+  --color-error-suave: #000000;
+  --color-exito-suave: #000000;
+  --color-aviso-suave: #333300;
+}
+
+/* ---------- Tamaño de letra (accesibilidad) ---------- */
+[data-escala='90'] { --escala-fuente: 0.9; }
+[data-escala='100'] { --escala-fuente: 1; }
+[data-escala='110'] { --escala-fuente: 1.1; }
+[data-escala='120'] { --escala-fuente: 1.2; }
+[data-escala='130'] { --escala-fuente: 1.3; }
+[data-escala='140'] { --escala-fuente: 1.4; }

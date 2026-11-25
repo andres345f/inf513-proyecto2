@@ -1,0 +1,53 @@
+.pagina-encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.9rem 1.25rem;
+}
+
+.pagina-encabezado__titulo {
+  margin-bottom: 0.2rem;
+}
+
+.pagina-encabezado__descripcion {
+  margin: 0;
+  max-width: 70ch;
+  color: var(--color-texto-suave);
+}
+
+.pagina-encabezado__accion {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* Interruptor tipo chip usado como acción secundaria del encabezado (p. ej. «Solo sin leer»). */
+.pagina-encabezado__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0 0.95rem;
+  border: var(--borde-grosor) solid color-mix(in srgb, var(--color-primario) 45%, var(--color-borde));
+  border-radius: 999px;
+  background: var(--color-superficie);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--duracion-rapida) ease, border-color var(--duracion-rapida) ease;
+}
+
+.pagina-encabezado__toggle:hover {
+  background: var(--color-primario-suave);
+}
+
+.pagina-encabezado__toggle input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--color-primario);
+  margin: 0;
+}
+.pagina-encabezado > * { min-width: 0; max-width: 100%; }
+.pagina-encabezado__titulo { overflow-wrap: anywhere; }

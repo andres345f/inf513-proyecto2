@@ -1,0 +1,118 @@
+/*
+ * Clases compartidas de las vistas de gestión (modales de decisión y
+ * formularios de acción). Las páginas de listado usan PaginaListado +
+ * FiltrosBarra + TablaDatos; este archivo cubre lo que va dentro de los
+ * modales y bloques de acción que aún no son componentes propios.
+ */
+
+.gestion__volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+
+.gestion__resumen {
+  margin: 0;
+  color: var(--color-texto-suave);
+  font-size: 0.92rem;
+}
+
+.gestion__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: var(--borde-grosor) solid color-mix(in srgb, var(--color-primario) 30%, var(--color-borde));
+  border-radius: var(--radio);
+  background: color-mix(in srgb, var(--color-primario) 4%, var(--color-superficie));
+}
+
+.gestion__cancelar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.gestion__cancelar label {
+  width: 100%;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.gestion__cancelar input,
+.gestion__cancelar select {
+  width: 100%;
+  min-height: 2.6rem;
+  padding: 0.45rem 0.65rem;
+  border: var(--borde-grosor) solid var(--color-borde-control);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+}
+
+.gestion__botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.gestion__accion-entrega {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+  min-width: min(12rem, 100%);
+}
+
+.gestion__accion-entrega input {
+  width: 100%;
+  min-height: 2.4rem;
+  padding: 0.35rem 0.55rem;
+  border: var(--borde-grosor) solid var(--color-borde-control);
+  border-radius: var(--radio-pequeno);
+  background: var(--color-superficie);
+}
+
+.gestion__confirmacion {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  white-space: normal;
+}
+
+/* Ficha de datos dentro del modal de decisión (pagos, devoluciones, productores). */
+.gestion__detalle-modal {
+  display: grid;
+  grid-template-columns: minmax(6rem, auto) minmax(0, 1fr);
+  gap: 0.35rem 1rem;
+  margin: 0 0 1rem;
+}
+
+.gestion__detalle-modal dt {
+  color: var(--color-texto-suave);
+  font-weight: 600;
+}
+
+.gestion__detalle-modal dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .gestion__cancelar {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .gestion__detalle-modal {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+
+  .gestion__detalle-modal dd {
+    margin-bottom: 0.4rem;
+  }
+}

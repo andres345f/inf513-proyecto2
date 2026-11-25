@@ -1,0 +1,48 @@
+.estado-cuenta__principales, .estado-cuenta__detalle { margin: .75rem 0; }
+.estado-cuenta__principales { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr)); gap: .75rem; }
+.estado-cuenta__principales dt, .estado-cuenta__detalle dt { color: var(--color-texto-suave); }
+.estado-cuenta dd { margin: 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.estado-cuenta__principales dd { font-size: 1.125rem; font-weight: 700; }
+.estado-cuenta__detalle > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .15rem .7rem; border-block-end: 1px solid var(--color-borde); padding-block: .45rem; }
+.estado-cuenta__alternar { display: block; width: fit-content; margin-block-end: 1rem; border: 0; background: transparent; color: var(--color-primario); padding: .4rem 0; min-height: 44px; font: inherit; font-weight: 650; text-decoration: underline; cursor: pointer; }
+@media screen { .estado-cuenta__detalle[data-abierto="false"] { display: none; } }
+.estado-cuenta h3 {
+  margin: 1rem 0 .25rem;
+  font-size: 1rem;
+}
+
+.estado-cuenta ul {
+  padding-inline-start: 1.4rem;
+}
+
+@media print {
+  .estado-cuenta .marca-feder-papel {
+    margin-inline-start: auto;
+    inline-size: auto;
+    block-size: 1lh;
+    max-inline-size: 30%;
+    object-fit: contain;
+  }
+
+  body:has(.estado-cuenta) :not(.estado-cuenta, .estado-cuenta *, :has(.estado-cuenta)),
+  .estado-cuenta button {
+    display: none !important;
+  }
+
+  body :has(.estado-cuenta) {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .estado-cuenta {
+    color: #111;
+    background: white;
+  }
+}

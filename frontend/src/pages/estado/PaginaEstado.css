@@ -1,0 +1,25 @@
+.pagina-estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 34rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+  border: var(--borde-grosor) dashed var(--color-borde);
+  border-radius: var(--radio);
+  background: var(--color-superficie);
+}
+
+.pagina-estado__icono {
+  color: var(--color-primario);
+}
+
+.pagina-estado__texto {
+  color: var(--color-texto-suave);
+}
+
+.pagina-estado__enlace {
+  font-weight: 700;
+}

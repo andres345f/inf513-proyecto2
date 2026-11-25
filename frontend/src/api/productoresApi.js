@@ -1,0 +1,40 @@
+import { clienteHttp } from './clienteHttp'
+
+const datos = (r) => r.data
+
+/** Productores y comunidades agrícolas (CU2). */
+export const productoresApi = {
+  productores: (filtros) => clienteHttp.get('/gestion/productores', { params: filtros }).then(datos),
+  aprobar: (id) => clienteHttp.post(`/gestion/productores/${id}/aprobar`).then(datos),
+  rechazar: (id, motivo) => clienteHttp.post(`/gestion/productores/${id}/rechazar`, { motivo }).then(datos),
+  comunidades: () => clienteHttp.get('/gestion/comunidades').then(datos),
+  crearComunidad: (c) => clienteHttp.post('/gestion/comunidades', c).then(datos),
+  actualizarComunidad: (id, c) => clienteHttp.put(`/gestion/comunidades/${id}`, c).then(datos),
+  miFicha: () => clienteHttp.get('/productor/ficha').then(datos),
+  estadoSolicitud: () => clienteHttp.get('/productor/solicitud').then(datos),
+  comunidadesDisponibles: () => clienteHttp.get('/comunidades-disponibles').then(datos),
+  solicitar: (solicitud) => clienteHttp.post('/productor/solicitud', solicitud).then(datos),
+  actualizarFicha: (ficha) => clienteHttp.put('/productor/ficha', ficha).then(datos),
+  lotes: () => clienteHttp.get('/productor/lotes').then(datos),
+  opcionesProduccion: () => clienteHttp.get('/productor/producciones/opciones').then(datos),
+  crearProduccion: (produccion) => clienteHttp.post('/productor/producciones', produccion).then(datos),
+  detalleProduccion: (id) => clienteHttp.get(`/productor/producciones/${id}`).then(datos),
+  actualizarProduccion: (id, produccion) => clienteHttp.put(`/productor/producciones/${id}`, produccion).then(datos),
+  cambiarEstadoProduccion: (id, estado) => clienteHttp.post(`/productor/producciones/${id}/estado`, { estado }).then(datos),
+  crearLote: (produccion, lote) => clienteHttp.post(`/productor/producciones/${produccion}/lotes`, lote).then(datos),
+  actualizarLote: (produccion, id, lote) => clienteHttp.put(`/productor/producciones/${produccion}/lotes/${id}`, lote).then(datos),
+  retirarLote: (id) => clienteHttp.post(`/productor/lotes/${id}/retirar`).then(datos),
+  propuestas: () => clienteHttp.get('/productor/productos-propuestos').then(datos),
+  proponerProducto: (producto) => clienteHttp.post('/productor/productos-propuestos', producto).then(datos),
+  detalleVenta: (id) => clienteHttp.get(`/productor/ventas/${id}`).then(datos),
+  lotesOfertados: () => clienteHttp.get('/gestion/lotes-ofertados').then(datos),
+  crearCompra: (compra) => clienteHttp.post('/gestion/compras', compra).then(datos),
+  detalleCompra: (id) => clienteHttp.get(`/gestion/compras/${id}`).then(datos),
+  recibirCompra: (id, recepcion) => clienteHttp.post(`/gestion/compras/${id}/recibir`, recepcion).then(datos),
+  pagarCompra: (id) => clienteHttp.post(`/gestion/compras/${id}/pagar`).then(datos),
+  propuestasGestion: () => clienteHttp.get('/gestion/productos-propuestos').then(datos),
+  aprobarPropuesta: (id, producto) => clienteHttp.post(`/gestion/productos-propuestos/${id}/aprobar`, producto).then(datos),
+  rechazarPropuesta: (id, motivo) => clienteHttp.post(`/gestion/productos-propuestos/${id}/rechazar`, { motivo }).then(datos),
+  cambiosComunidad: () => clienteHttp.get('/gestion/cambios-comunidad-productor').then(datos),
+  resolverCambioComunidad: (id, aprobar, motivo = null) => clienteHttp.post(`/gestion/cambios-comunidad-productor/${id}`, { aprobar, motivo }).then(datos),
+}

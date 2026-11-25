@@ -1,0 +1,73 @@
+.cierre-gestion__lista { display: grid; gap: 1rem; }
+.cierre-gestion__tarjeta { border: var(--borde-grosor) solid var(--color-borde); border-radius: var(--radio); background: var(--color-superficie); box-shadow: var(--sombra); overflow: hidden; transition: border-color var(--duracion-rapida) ease, box-shadow var(--duracion-rapida) ease; }
+.cierre-gestion__tarjeta:hover { border-color: color-mix(in srgb, var(--color-primario) 36%, var(--color-borde)); box-shadow: var(--sombra-elevada); }
+.cierre-gestion__tarjeta[open] { border-color: var(--color-primario); }
+.cierre-gestion__tarjeta summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; padding: 1rem 1.15rem; cursor: pointer; }
+.cierre-gestion__tarjeta summary > span { display: grid; gap: .25rem; }
+.cierre-gestion__tarjeta summary > span:last-child { justify-items: end; }
+.cierre-gestion__tarjeta small { color: var(--color-texto-suave); }
+.cierre-gestion__resumen-compra {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  min-height: 5.25rem;
+  padding: 1rem 1.15rem;
+}
+.cierre-gestion__identidad {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.2rem 0.5rem;
+  min-width: 0;
+}
+.cierre-gestion__codigo {
+  color: var(--color-primario);
+  white-space: nowrap;
+}
+.cierre-gestion__productor {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-weight: 700;
+}
+.cierre-gestion__identidad small {
+  grid-column: 1 / -1;
+  display: block;
+}
+.cierre-gestion__estado-compra {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  white-space: nowrap;
+}
+.cierre-gestion__total {
+  font-size: 1.05rem;
+}
+.cierre-gestion__accion { white-space: nowrap; }
+.cierre-gestion__contenido { display: grid; gap: 1rem; padding: 1.1rem; border-top: var(--borde-grosor) solid var(--color-borde); background: color-mix(in srgb, var(--color-superficie-alterna) 40%, var(--color-superficie)); }
+.cierre-gestion__contenido dl { display: grid; grid-template-columns: auto 1fr; gap: .35rem 1rem; }
+.cierre-gestion__contenido dt { font-weight: 600; color: var(--color-texto-suave); }
+.cierre-gestion__contenido dd { margin: 0; }
+@media (max-width: 600px) { .cierre-gestion__tarjeta summary { align-items: flex-start; flex-direction: column; } .cierre-gestion__tarjeta summary > span:last-child { justify-items: start; } .cierre-gestion__contenido dl { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .cierre-gestion__resumen-compra {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .cierre-gestion__accion {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .cierre-gestion__resumen-compra {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  .cierre-gestion__identidad {
+    grid-template-columns: 1fr;
+  }
+  .cierre-gestion__identidad small { grid-column: auto; }
+  .cierre-gestion__estado-compra { justify-content: space-between; }
+  .cierre-gestion__accion { grid-column: auto; }
+}
