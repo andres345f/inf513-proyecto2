@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { CircleMarker, MapContainer, TileLayer, Tooltip, useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import './MapaUbicacion.css'
@@ -8,6 +8,13 @@ const CENTRO_SANTA_CRUZ = [-17.7833, -63.1821]
 /** Mapa para marcar el punto de entrega. Muestra también el almacén de origen. */
 export default function MapaUbicacion({ destino, origen, alElegir }) {
   const mapa = useRef(null)
+  // Leaflet no pide las tiles si el contenedor tenía tamaño 0 al iniciarse
+  // (p. ej. cuando el mapa aparece dentro de un paso que se muestra después).
+  // Forzamos a recalcular el tamaño tras montar para que cargue el mapa.
+  useEffect(() => {
+    const t = setTimeout(() => mapa.current?.invalidateSize(), 150)
+    return () => clearTimeout(t)
+  }, [])
   const marcarCentro = () => {
     const centro = mapa.current?.getCenter()
     if (centro) alElegir({ lat: centro.lat, lng: centro.lng })
