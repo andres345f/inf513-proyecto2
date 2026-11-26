@@ -46,6 +46,20 @@ class CabecerasSeguridadTest extends TestCase
         $this->assertStringContainsString('https://fonts.gstatic.com', $csp['font-src']);
     }
 
+    public function test_openstreetmap_recibe_referente_y_las_dos_fuentes_de_cabeceras_coinciden(): void
+    {
+        $respuesta = $this->cabeceras();
+        $csp = $this->directivasCsp($respuesta);
+
+        $this->assertSame('strict-origin-when-cross-origin', $respuesta->headers->get('Referrer-Policy'));
+        $this->assertStringContainsString('https://tile.openstreetmap.org', $csp['img-src']);
+
+        $htaccess = file_get_contents(__DIR__.'/../../public/.htaccess');
+        $this->assertIsString($htaccess);
+        $this->assertStringContainsString('Header always set Referrer-Policy "strict-origin-when-cross-origin"', $htaccess);
+        $this->assertStringContainsString('https://tile.openstreetmap.org', $htaccess);
+    }
+
     public function test_la_csp_no_se_relaja_en_lo_demas(): void
     {
         $csp = $this->directivasCsp($this->cabeceras());
