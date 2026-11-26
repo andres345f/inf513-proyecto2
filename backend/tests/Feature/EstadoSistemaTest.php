@@ -19,7 +19,7 @@ class EstadoSistemaTest extends TestCase
             ->assertJsonPath('sistema', 'FEDER')
             ->assertHeader('X-Content-Type-Options', 'nosniff')
             ->assertHeader('X-Frame-Options', 'DENY')
-            ->assertHeader('Referrer-Policy', 'same-origin');
+            ->assertHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     }
 
     public function test_cors_no_autoriza_un_origen_desconocido(): void

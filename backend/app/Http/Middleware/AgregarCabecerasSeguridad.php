@@ -15,7 +15,9 @@ class AgregarCabecerasSeguridad
 
         $response->headers->set('X-Content-Type-Options', 'nosniff');
         $response->headers->set('X-Frame-Options', 'DENY');
-        $response->headers->set('Referrer-Policy', 'same-origin');
+        // OpenStreetMap exige un Referer válido para las tiles web. Esta política envía
+        // solo el origen en peticiones externas, sin revelar la ruta del checkout.
+        $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
         // geolocation=(self): «Usar mi ubicación» del checkout la pide en el propio sitio; nunca en marcos ajenos.
         $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(self)');
         // Las tipografías de los temas (frontend/index.html) vienen de Google Fonts: hoja de estilos
