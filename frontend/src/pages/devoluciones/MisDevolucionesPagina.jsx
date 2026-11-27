@@ -44,7 +44,7 @@ export default function MisDevolucionesPagina() {
     <PaginaListado
         className="pagina-listado--apilada"
         titulo="Mis devoluciones"
-        descripcion="Solicita la devolución de un producto de un pedido entregado y sigue su estado."
+        descripcion="Solicita la devolución de un producto."
         accionPrincipal={hayDevolvibles && <Boton onClick={() => setAsistenteAbierto(true)}>Solicitar una devolución</Boton>}
         cargando={resumen.cargando} actualizando={resumen.actualizando} error={resumen.error} alReintentar={resumen.recargar}>
       {mensaje && <Alerta tipo={mensaje.tipo}>{mensaje.texto}</Alerta>}
