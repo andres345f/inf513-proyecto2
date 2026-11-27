@@ -1,8 +1,11 @@
 name: Desplegar frontend a TecnoWeb (FTP)
 
-# Primera fase: ejecución manual. La opción dry_run viene activada para que la
-# primera prueba solo muestre qué transferiría, sin modificar el servidor.
+# Los pushes a main despliegan el frontend. La ejecución manual conserva una
+# opción dry_run activada por defecto para poder simular sin modificar el servidor.
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       dry_run:
@@ -74,13 +77,14 @@ jobs:
           local-dir: ./backend/public/app/
           server-dir: ./proyecto2/public/app/
           state-name: .ftp-deploy-frontend-state.json
-          dry-run: ${{ inputs.dry_run }}
+          # En un push despliega realmente; en ejecución manual respeta la casilla.
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
           dangerous-clean-slate: false
           log-level: standard
           timeout: 600000
 
       - name: Verificar la aplicación pública
-        if: ${{ inputs.dry_run == false }}
+        if: ${{ github.event_name == 'push' || inputs.dry_run == false }}
         run: |
           HTML="$(curl --fail --location --retry 3 --retry-delay 2 \
             --silent --show-error "${URL_PUBLICA}")"
@@ -95,6 +99,7 @@ jobs:
             echo "- Commit: \`${GITHUB_SHA}\`"
             echo "- Carpeta local permitida: \`backend/public/app/\`"
             echo "- Destino FTP: \`proyecto2/public/app/\`"
-            echo "- Simulación: \`${{ inputs.dry_run }}\`"
+            echo "- Evento: \`${GITHUB_EVENT_NAME}\`"
+            echo "- Simulación manual: \`${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}\`"
             echo "- Backend, .env, vendor, storage y base de datos: no incluidos"
           } >> "${GITHUB_STEP_SUMMARY}"

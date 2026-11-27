@@ -38,7 +38,7 @@ function InicioVisitante() {
   return <div className="inicio">
     <section className="inicio__portada" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}marca/portada-comunidad.png)` }}>
       <div className="inicio__texto">
-        <h1>Productos de nuestras comunidades</h1>
+        <h1>Productos de comunidades</h1>
         <p>Explora los productos de las comunidades afiliadas a FEDER. Consulta su disponibilidad y conoce su origen antes de comprar.</p>
         <Link to="/catalogo" className="inicio__accion">Ver catálogo <ArrowRight size={18} /></Link>
       </div>
