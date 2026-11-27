@@ -1,47 +1,40 @@
-# =====================================================================
-# CI/CD · Compila el proyecto y lo sube a TecnoWeb por FTP.
-# Se ejecuta en cada "git push" a la rama indicada (y a mano si quieres).
-#
-# ANTES de usarlo, en GitHub:  Settings → Secrets and variables → Actions
-# crea estos 3 secretos (NO van en el código):
-#   FTP_HOST      -> el servidor FTP de TecnoWeb (ej. tecnoweb.org.bo)
-#   FTP_USER      -> tu usuario FTP (grupo29sa)
-#   FTP_PASSWORD  -> tu contraseña FTP
-# Y revisa las dos líneas marcadas con  # <-- CAMBIA
-# =====================================================================
-name: Desplegar a TecnoWeb (FTP)
+name: Desplegar frontend a TecnoWeb (SSH)
 
+# Durante la prueba solo se ejecuta manualmente desde la pestaña Actions.
+# Cuando el flujo esté verificado se podrá evaluar agregar un disparador por push.
 on:
-  push:
-    branches: [ main ]        # <-- CAMBIA a "master" si tu rama se llama así
-  workflow_dispatch:           # permite lanzarlo a mano desde la pestaña Actions
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: produccion-frontend
+  cancel-in-progress: false
+
+env:
+  SSH_HOST: ${{ secrets.TECNOWEB_SSH_HOST }}
+  SSH_USER: ${{ secrets.TECNOWEB_SSH_USER }}
+  SSH_PORT: ${{ secrets.TECNOWEB_SSH_PORT }}
+  URL_PUBLICA: https://mail.tecnoweb.org.bo/inf513/grupo29sa/proyecto2/app/
 
 jobs:
   construir-y-desplegar:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
     steps:
       - name: Descargar el código
         uses: actions/checkout@v4
 
-      # ---------- Backend (Laravel): dependencias PHP ----------
-      - name: Preparar PHP 8.4
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
-          extensions: pdo_pgsql, gd, intl, mbstring, xml, zip
-
-      - name: Instalar dependencias de Composer (sin dev)
-        working-directory: backend
-        run: composer install --no-dev --optimize-autoloader --no-interaction
-
-      # ---------- Frontend (React/Vite): compilar ----------
-      - name: Preparar Node 20
+      - name: Preparar Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
 
-      # Las rutas del subpath no son secretas; el robot las escribe antes de compilar.
-      - name: Configurar rutas del subpath
+      - name: Configurar rutas de producción
         run: |
           cat > frontend/.env.produccion <<'EOF'
           VITE_API_URL=/inf513/grupo29sa/proyecto2/api
@@ -49,33 +42,119 @@ jobs:
           VITE_BASENAME=/inf513/grupo29sa/proyecto2
           EOF
 
-      - name: Compilar el frontend para TecnoWeb
+      - name: Validar y compilar el frontend
         working-directory: frontend
         run: |
           npm ci
+          npm run lint
           npm run build:produccion
+          test -f ../backend/public/app/index.html
 
-      # ---------- Subir al servidor por FTP ----------
-      - name: Subir por FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          # La primera subida mueve miles de archivos (vendor/); más tiempo evita el timeout.
-          timeout: 600000
-          # Carpeta local que se sube (la app Laravel ya compilada):
-          local-dir: ./backend/
-          # Carpeta en el SERVIDOR donde debe quedar (confírmala con tu docente):
-          server-dir: ./proyecto2/          # <-- CAMBIA por la ruta real en TecnoWeb
-          # No subir estos (secretos, git, pruebas, logs):
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.env
-            **/.env.*
-            **/tests/**
-            **/storage/logs/**
-            **/.github/**
-            # vendor/
-            **/vendor/**
+      - name: Empaquetar exclusivamente public/app
+        run: |
+          tar -C backend/public -czf "/tmp/feder-frontend-${GITHUB_SHA}.tar.gz" app
+
+      - name: Configurar acceso SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.TECNOWEB_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.TECNOWEB_SSH_KNOWN_HOSTS }}
+        run: |
+          test -n "${SSH_HOST}"
+          test -n "${SSH_USER}"
+          test -n "${SSH_PORT}"
+          test -n "${SSH_PRIVATE_KEY}"
+          test -n "${SSH_KNOWN_HOSTS}"
+          install -m 700 -d ~/.ssh
+          printf '%s' "${SSH_PRIVATE_KEY}" | tr -d '\r' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "${SSH_KNOWN_HOSTS}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+          ssh-keygen -y -f ~/.ssh/id_ed25519 > /dev/null
+
+      - name: Transferir el paquete temporal
+        run: |
+          scp -P "${SSH_PORT}" \
+            "/tmp/feder-frontend-${GITHUB_SHA}.tar.gz" \
+            "${SSH_USER}@${SSH_HOST}:feder-frontend-${GITHUB_SHA}.tar.gz"
+
+      - name: Activar el frontend con respaldo
+        id: activar
+        run: |
+          ssh -p "${SSH_PORT}" "${SSH_USER}@${SSH_HOST}" \
+            "RELEASE_SHA='${GITHUB_SHA}' bash -s" <<'REMOTE'
+          set -Eeuo pipefail
+
+          readonly APP_DIR="${HOME}/proyecto2"
+          readonly PUBLIC_DIR="${APP_DIR}/public"
+          readonly CURRENT_DIR="${PUBLIC_DIR}/app"
+          readonly NEW_DIR="${PUBLIC_DIR}/app_nueva"
+          readonly BACKUP_DIR="${PUBLIC_DIR}/app_anterior"
+          readonly ARCHIVE="${HOME}/feder-frontend-${RELEASE_SHA}.tar.gz"
+          readonly STAGE_DIR="${HOME}/feder-frontend-${RELEASE_SHA}"
+
+          [[ "${APP_DIR}" == "${HOME}/proyecto2" ]]
+          [[ -d "${PUBLIC_DIR}" ]]
+
+          cleanup() {
+            rm -rf -- "${STAGE_DIR}" "${ARCHIVE}" "${NEW_DIR}"
+          }
+          trap cleanup EXIT
+
+          rm -rf -- "${STAGE_DIR}"
+          mkdir -p -- "${STAGE_DIR}"
+          tar -xzf "${ARCHIVE}" -C "${STAGE_DIR}"
+          test -f "${STAGE_DIR}/app/index.html"
+
+          rm -rf -- "${NEW_DIR}"
+          mv -- "${STAGE_DIR}/app" "${NEW_DIR}"
+          rm -rf -- "${BACKUP_DIR}"
+
+          if [[ -d "${CURRENT_DIR}" ]]; then
+            mv -- "${CURRENT_DIR}" "${BACKUP_DIR}"
+          fi
+
+          if ! mv -- "${NEW_DIR}" "${CURRENT_DIR}"; then
+            if [[ -d "${BACKUP_DIR}" && ! -d "${CURRENT_DIR}" ]]; then
+              mv -- "${BACKUP_DIR}" "${CURRENT_DIR}"
+            fi
+            exit 1
+          fi
+          REMOTE
+
+      - name: Verificar la aplicación pública
+        id: verificar
+        run: |
+          curl --fail --location --retry 3 --retry-delay 2 \
+            --silent --show-error "${URL_PUBLICA}" > /dev/null
+
+      - name: Restaurar el frontend anterior si falla la verificación
+        if: failure() && steps.activar.outcome == 'success'
+        run: |
+          ssh -p "${SSH_PORT}" "${SSH_USER}@${SSH_HOST}" 'bash -s' <<'REMOTE'
+          set -Eeuo pipefail
+
+          readonly PUBLIC_DIR="${HOME}/proyecto2/public"
+          readonly CURRENT_DIR="${PUBLIC_DIR}/app"
+          readonly BACKUP_DIR="${PUBLIC_DIR}/app_anterior"
+          readonly FAILED_DIR="${PUBLIC_DIR}/app_fallida"
+
+          [[ "${PUBLIC_DIR}" == "${HOME}/proyecto2/public" ]]
+          test -d "${BACKUP_DIR}"
+
+          rm -rf -- "${FAILED_DIR}"
+          if [[ -d "${CURRENT_DIR}" ]]; then
+            mv -- "${CURRENT_DIR}" "${FAILED_DIR}"
+          fi
+          mv -- "${BACKUP_DIR}" "${CURRENT_DIR}"
+          rm -rf -- "${FAILED_DIR}"
+          REMOTE
+
+      - name: Resumen
+        run: |
+          {
+            echo "### Frontend desplegado"
+            echo ""
+            echo "- Commit: \`${GITHUB_SHA}\`"
+            echo "- Destino: \`${URL_PUBLICA}\`"
+            echo "- Respaldo remoto: \`~/proyecto2/public/app_anterior\`"
+          } >> "${GITHUB_STEP_SUMMARY}"
