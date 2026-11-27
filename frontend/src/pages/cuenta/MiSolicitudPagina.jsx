@@ -26,7 +26,7 @@ export default function MiSolicitudPagina() {
 
   return (
     <div className="mi-cuenta">
-      <Migas items={[{ etiqueta: 'Mi cuenta', ruta: '/mi-cuenta' }, { etiqueta: 'Solicitud de productor' }]} />
+      <Migas items={[{ etiqueta: 'Cuenta', ruta: '/mi-cuenta' }, { etiqueta: 'Solicitud de productor' }]} />
       <EncabezadoPagina
         titulo="Solicitud de productor"
         descripcion="Sigue el estado de tu solicitud para unirte a FEDER como productor."
